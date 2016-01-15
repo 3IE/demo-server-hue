@@ -13,3 +13,13 @@
 
 app.addController(LightController);
 app.start();
+
+// permet d'avoir une communication bidirectionnelle 
+var io = require('socket.io')(app.serverInstance);
+// event généré dès qu'un client se connecte
+io.on('connection', function(client) {
+    console.log('a user connected');
+    // on affecte la socket directement dans l'app pour y avoir accès partout
+    // a changer lors du prochaine update de typefx
+    app.clientSocket = client;
+});
