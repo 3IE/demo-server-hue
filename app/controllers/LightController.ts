@@ -48,9 +48,7 @@ class LightController extends TF.Controller {
     off(lightId: number) {
         // invalid cache data for GET request
         this.invalidCache(this.response);
-
-
-
+        
         var api = this.bridgeConnection();
 
         api.setLightState(lightId, this.createState().off())
@@ -60,6 +58,25 @@ class LightController extends TF.Controller {
                 stateLight.state = false;
                 // on recupére les sockets et on emet le message
                 app.clientSocket.emit('stateLight', stateLight);
+
+                return this.json({ result: true });
+            })
+            .fail((error) => {
+                //console.error(error);
+                return this.json({ result: false });
+            })
+            .done();
+    }
+    
+    updatebrightness(lightId: number, value:number){
+         // invalid cache data for GET request
+        this.invalidCache(this.response);
+        
+        var api = this.bridgeConnection();
+
+        api.setLightState(lightId, this.createState().bri(value))
+            .then((result) => {                
+                
 
                 return this.json({ result: true });
             })
