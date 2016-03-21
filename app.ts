@@ -12,6 +12,7 @@
 /// <reference path="app/controllers/LightController.ts" />
 
 app.addController(LightController);
+app.config.set('port', process.env.PORT || 3000);
 app.start();
 
 // permet d'avoir une communication bidirectionnelle 
