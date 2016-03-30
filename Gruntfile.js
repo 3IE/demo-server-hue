@@ -10,7 +10,7 @@ module.exports = function (grunt) {
                 out: ".build/app.js",
                 options: {
                     target: 'es5',
-                    module: 'commonjs',
+                    module: 'system',
                     sourceMap: false,
                     declaration: true,
                     removeComments: true,

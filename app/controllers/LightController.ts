@@ -28,18 +28,20 @@ class LightController extends TF.Controller {
 
         api.setLightState(light.lightId, this.createState().on().rgb(light.color.r, light.color.g, light.color.b))
             .then((result) => {
-                
-                 let stateLight : Light = new Light();
+
+                let stateLight: Light = new Light();
                 stateLight.lightId = light.lightId;
                 stateLight.state = true;
                 stateLight.color = light.color;
-                // on recupére les sockets et on emet le message
-                app.clientSocket.emit('stateLight', stateLight);
-                
+
+                if (app.clientSocket !== undefined) {
+                    // on recupére les sockets et on emet le message
+                    app.clientSocket.emit('stateLight', stateLight);
+                }
+
                 return this.json({ result: true });
             })
             .fail((error) => {
-                console.error(error);
                 return this.json({ result: false });
             })
             .done();
@@ -48,40 +50,39 @@ class LightController extends TF.Controller {
     off(lightId: number) {
         // invalid cache data for GET request
         this.invalidCache(this.response);
-        
+
         var api = this.bridgeConnection();
 
         api.setLightState(lightId, this.createState().off())
-            .then((result) => {                
-                let stateLight : Light = new Light();
+            .then((result) => {
+                let stateLight: Light = new Light();
                 stateLight.lightId = lightId;
                 stateLight.state = false;
-                // on recupére les sockets et on emet le message
-                app.clientSocket.emit('stateLight', stateLight);
+
+                if (app.clientSocket !== undefined) {
+                    // on recupére les sockets et on emet le message
+                    app.clientSocket.emit('stateLight', stateLight);
+                }
 
                 return this.json({ result: true });
             })
             .fail((error) => {
-                //console.error(error);
                 return this.json({ result: false });
             })
             .done();
     }
-    
-    updatebrightness(lightId: number, value:number){
-         // invalid cache data for GET request
+
+    updatebrightness(lightId: number, value: number) {
+        // invalid cache data for GET request
         this.invalidCache(this.response);
-        
+
         var api = this.bridgeConnection();
 
         api.setLightState(lightId, this.createState().bri(value))
-            .then((result) => {                
-                
-
+            .then((result) => {
                 return this.json({ result: true });
             })
             .fail((error) => {
-                //console.error(error);
                 return this.json({ result: false });
             })
             .done();
