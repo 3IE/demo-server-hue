@@ -9,8 +9,7 @@ app.configure(() => {
 
     // load config
     app.config.addJson('app.json');
-
-
+    
     // default routes
     app.router.map('/:controller/:action?/:id?', { action: 'index' });
 

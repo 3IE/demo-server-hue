@@ -5,6 +5,9 @@ This repository demonstrates how to control philips hue with node-js and typescr
 ## Prerequisites
 If you are on Windows, don't forget install grunt-cli.
 
+## Important
+The socket.io support is based on a develop version of typefx (commit 52dfb61 develop branch). This version isn't yet publish on npm
+
 ## Installation
 Clone the repository :
 ```
@@ -19,29 +22,4 @@ To test the server browse these urls :
 ```
 http://localhost:3000/home
 http://localhost:3000/api/getResponse
-```
-
-## Add new controller
-To add new contoller, create new file in folder controllers (ex: UserController.js):
-```
-/// <reference path="../../app.ts" />
-
-class UserController extends TF.Controller{
-	
-	index(){
-		this.json({name:'arnaud', lemettre:''});
-	}
-}
-```
-
-In file app.ts :
-
-Reference this new file 
-```
-/// <reference path="app/controllers/UserController.ts" />
-```
-
-And add the new controller :
-```
-app.addController(UserController);
 ```
