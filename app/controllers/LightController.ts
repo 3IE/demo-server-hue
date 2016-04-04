@@ -34,7 +34,7 @@ class LightController extends TF.Controller {
                 stateLight.state = true;
                 stateLight.color = light.color;
 
-                if (app.clientSocket !== undefined) {
+                if (app.clientSocket !== null && app.clientSocket !== undefined) {
                     // on recupére les sockets et on emet le message
                     app.clientSocket.emit('stateLight', stateLight);
                 }
@@ -59,7 +59,7 @@ class LightController extends TF.Controller {
                 stateLight.lightId = lightId;
                 stateLight.state = false;
 
-                if (app.clientSocket !== undefined) {
+                if (app.clientSocket !== null && app.clientSocket !== undefined) {
                     // on recupére les sockets et on emet le message
                     app.clientSocket.emit('stateLight', stateLight);
                 }
